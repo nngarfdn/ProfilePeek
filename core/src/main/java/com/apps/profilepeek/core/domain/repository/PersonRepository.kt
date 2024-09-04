@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface PersonRepository {
     fun getPersonList(): Flow<Resource<List<PersonEntity>>>
+    fun getPersonDetail(id: String): Flow<PersonEntity?>
 }

@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt.android.gradle.plugin)
 }
 
 android {
@@ -43,6 +45,19 @@ dependencies {
 
     //add core module
     implementation(project(":core"))
+    //add detailperson module
+    implementation(project(":detailperson"))
+
+    implementation(libs.lifecycle.viewmodel.ktx)
+
+    //glide
+    implementation(libs.glide)
+    implementation(libs.androidx.swiperefreshlayout)
+
+    //hilt
+    kapt(libs.hilt.compiler)
+    implementation(libs.hilt.android)
+    kapt(libs.androidx.hilt.compiler)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

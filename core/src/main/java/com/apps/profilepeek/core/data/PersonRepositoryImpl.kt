@@ -8,6 +8,7 @@ import com.apps.profilepeek.core.data.remote.network.ApiResponse
 import com.apps.profilepeek.core.data.remote.response.PersonResponse
 import com.apps.profilepeek.core.domain.repository.PersonRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.firstOrNull
 
 class PersonRepositoryImpl(
     private val remoteDataSource: RemoteDataSource,
@@ -24,8 +25,13 @@ class PersonRepositoryImpl(
             }
 
             override suspend fun saveCallResult(data: PersonResponse) {
-                val personList = PersonMappers.mapPersonResponseToEntity(data)
-                localDataSource.insertPersons(personList)
+                val newPersonList = PersonMappers.mapPersonResponseToEntity(data)
+                val existingPersonList = localDataSource.getAllPersons().firstOrNull() ?: emptyList()
+
+                if (newPersonList != existingPersonList) {
+                    localDataSource.clearAllPersons()
+                    localDataSource.insertPersons(newPersonList)
+                }
             }
 
             override fun shouldFetch(data: List<PersonEntity>?): Boolean {
@@ -33,4 +39,8 @@ class PersonRepositoryImpl(
             }
 
         }.asFlow()
+
+    override fun getPersonDetail(id: String): Flow<PersonEntity?> {
+        return localDataSource.getPersonById(id)
+    }
 }
