@@ -2,7 +2,6 @@ package com.apps.profilepeek.core.data.local
 
 import com.apps.profilepeek.core.data.local.entity.PersonEntity
 import com.apps.profilepeek.core.data.local.room.PersonDao
-import com.apps.profilepeek.core.data.remote.response.PersonResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn

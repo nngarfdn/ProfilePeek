@@ -2,7 +2,6 @@ package com.apps.profilepeek.core.domain.usecase
 
 import com.apps.profilepeek.core.data.Resource
 import com.apps.profilepeek.core.data.local.entity.PersonEntity
-import com.apps.profilepeek.core.domain.mapper.DomainDataMapper.mapToUiModel
 import com.apps.profilepeek.core.domain.model.PersonUiModel
 import com.apps.profilepeek.core.domain.repository.PersonRepository
 import kotlinx.coroutines.flow.Flow
@@ -21,5 +20,14 @@ class GetDetailPersonUseCase @Inject constructor(private val personRepository: P
                 }
             }
         }
+    }
+
+    private fun mapToUiModel(personEntity: PersonEntity): PersonUiModel {
+        return PersonUiModel(
+            id = personEntity.id,
+            name = personEntity.name,
+            avatar = personEntity.avatar,
+            city = personEntity.city
+        )
     }
 }

@@ -2,7 +2,6 @@ package com.apps.profilepeek.core.domain.repository
 
 import com.apps.profilepeek.core.data.Resource
 import com.apps.profilepeek.core.data.local.entity.PersonEntity
-import com.apps.profilepeek.core.domain.model.PersonUiModel
 import kotlinx.coroutines.flow.Flow
 
 interface PersonRepository {
